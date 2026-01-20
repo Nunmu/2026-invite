@@ -46,7 +46,7 @@
             to { background-position: 0 1000px; }
         }
 
-        /* 顶部祥云装饰（用CSS画的，不需要图片） */
+        /* 顶部祥云装饰 */
         .header-deco {
             position: absolute;
             top: -50px;
@@ -65,222 +65,54 @@
             margin: 0 auto;
             position: relative;
             padding-bottom: 80px;
-            z-index: 2; /* 保证内容在金粉之上 */
+            z-index: 2;
         }
 
         /* --- 核心动画类 (Scroll Reveal) --- */
-        
-        /* 1. 向上浮现 (用于标题/卡片) */
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        /* 2. 左侧滑入 (用于文字段落) */
-        .reveal-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 1s ease-out;
-        }
-
-        /* 3. 右侧滑入 (用于文字段落) */
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 1s ease-out;
-        }
-
-        /* 4. 缩放渐显 (用于图片) */
-        .reveal-zoom {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        /* 激活状态 */
-        .active {
-            opacity: 1 !important;
-            transform: translate(0) scale(1) !important;
-        }
+        .reveal-up { opacity: 0; transform: translateY(50px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 1s ease-out; }
+        .reveal-right { opacity: 0; transform: translateX(50px); transition: all 1s ease-out; }
+        .reveal-zoom { opacity: 0; transform: scale(0.8); transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .active { opacity: 1 !important; transform: translate(0) scale(1) !important; }
 
         /* --- 页面组件样式 --- */
-
-        /* 1. 封面 Cover */
+        /* 1. 封面 */
         .cover {
-            position: relative;
-            text-align: center;
-            padding-top: 60px;
-            padding-bottom: 20px;
-            min-height: 90vh; /* 首屏充满屏幕 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            position: relative; text-align: center; padding-top: 60px; padding-bottom: 20px;
+            min-height: 90vh; display: flex; flex-direction: column; justify-content: center;
         }
-        .logo {
-            font-size: 18px;
-            color: var(--light-gold);
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            font-weight: 300;
-        }
-        .hero-img-box {
-            position: relative;
-            margin: 20px 0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid rgba(255,215,0,0.3);
-        }
-        .hero-img {
-            width: 100%;
-            display: block;
-        }
-        .main-title {
-            background: linear-gradient(to bottom, #FFE5B4, #D4AF37);
-            -webkit-background-clip: text;
-            color: transparent;
-            font-size: 28px;
-            font-weight: bold;
-            margin: 30px 0 10px;
-            line-height: 1.4;
-        }
-        
-        /* 下滑提示动画 */
-        .scroll-hint {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--light-gold);
-            font-size: 12px;
-            animation: bounce 2s infinite;
-            opacity: 0.8;
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
-            40% {transform: translateX(-50%) translateY(-10px);}
-            60% {transform: translateX(-50%) translateY(-5px);}
-        }
+        .logo { font-size: 18px; color: var(--light-gold); letter-spacing: 4px; margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); font-weight: 300; }
+        .hero-img-box { position: relative; margin: 20px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.4); border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,215,0,0.3); }
+        .hero-img { width: 100%; display: block; }
+        .main-title { background: linear-gradient(to bottom, #FFE5B4, #D4AF37); -webkit-background-clip: text; color: transparent; font-size: 28px; font-weight: bold; margin: 30px 0 10px; line-height: 1.4; }
+        .scroll-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: var(--light-gold); font-size: 12px; animation: bounce 2s infinite; opacity: 0.8; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);} 40% {transform: translateX(-50%) translateY(-10px);} 60% {transform: translateX(-50%) translateY(-5px);} }
 
-        /* 2. 通用玻璃卡片 Card */
+        /* 2. 通用玻璃卡片 */
         .card {
-            margin: 25px 20px;
-            /* 磨砂玻璃效果 */
-            background: rgba(139, 0, 0, 0.5); 
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 12px;
-            padding: 30px 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            margin: 25px 20px; background: rgba(139, 0, 0, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 30px 20px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
         }
-        
-        .card-title {
-            text-align: center;
-            font-size: 20px;
-            color: var(--gold);
-            margin-bottom: 25px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .card-title::before, .card-title::after {
-            content: '';
-            display: block;
-            width: 30px;
-            height: 1px;
-            background: var(--gold);
-            margin: 0 10px;
-            opacity: 0.5;
-        }
-
-        .text-line {
-            line-height: 1.8;
-            font-size: 15px;
-            text-align: justify;
-            margin-bottom: 15px;
-            color: #f0f0f0;
-        }
+        .card-title { text-align: center; font-size: 20px; color: var(--gold); margin-bottom: 25px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+        .card-title::before, .card-title::after { content: ''; display: block; width: 30px; height: 1px; background: var(--gold); margin: 0 10px; opacity: 0.5; }
+        .text-line { line-height: 1.8; font-size: 15px; text-align: justify; margin-bottom: 15px; color: #f0f0f0; }
 
         /* 3. 品牌图片 */
-        .brand-box {
-            margin: 40px 0;
-            position: relative;
-        }
-        .brand-box::before {
-            content: '';
-            position: absolute;
-            top: -10px; left: 20px; right: 20px; bottom: -10px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            z-index: -1;
-        }
-        .brand-img {
-            width: 100%;
-            display: block;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
+        .brand-box { margin: 40px 0; position: relative; }
+        .brand-box::before { content: ''; position: absolute; top: -10px; left: 20px; right: 20px; bottom: -10px; border: 1px solid rgba(212, 175, 55, 0.2); z-index: -1; }
+        .brand-img { width: 100%; display: block; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
 
         /* 4. 活动宫格 */
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        .grid-item {
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .grid-img {
-            height: 110px;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s;
-        }
-        .grid-text {
-            color: var(--light-gold);
-            text-align: center;
-            padding: 12px 5px;
-            font-size: 13px;
-        }
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .grid-item { background: rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .grid-img { height: 120px; background-size: cover; background-position: center; transition: transform 0.5s; }
+        .grid-text { color: var(--light-gold); text-align: center; padding: 12px 5px; font-size: 14px; font-weight: bold; }
 
         /* 5. 表单 */
-        .form-input {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
-            background: rgba(255,255,255,0.9);
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            color: #333;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(45deg, #D4AF37, #F0E68C, #D4AF37);
-            background-size: 200% 200%;
-            animation: shine 3s infinite;
-            border: none;
-            color: #8B0000;
-            font-weight: bold;
-            font-size: 16px;
-            border-radius: 30px;
-            cursor: pointer;
-            margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-        }
-        @keyframes shine {
-            0% {background-position: 0% 50%;}
-            50% {background-position: 100% 50%;}
-            100% {background-position: 0% 50%;}
-        }
+        .form-input { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.9); border: none; border-radius: 4px; font-size: 14px; color: #333; }
+        .submit-btn { width: 100%; padding: 15px; background: linear-gradient(45deg, #D4AF37, #F0E68C, #D4AF37); background-size: 200% 200%; animation: shine 3s infinite; border: none; color: #8B0000; font-weight: bold; font-size: 16px; border-radius: 30px; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); }
+        @keyframes shine { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
 
-        /* 图片占位符 */
         img { object-fit: cover; }
     </style>
 </head>
@@ -293,52 +125,33 @@
 
     <div class="cover">
         <div class="logo reveal-up">ECOWATER 怡口净水</div>
-        
         <div class="hero-img-box reveal-zoom">
             <img src="hero.jpg" alt="怡口净水" class="hero-img">
         </div>
-        
         <div class="main-title reveal-up" style="transition-delay: 0.2s;">
             <span style="font-size:16px; display:block; margin-bottom:5px; font-weight:normal;">新春特别企划</span>
             老客户私享茶话会
         </div>
-
         <div class="reveal-up" style="font-size:14px; color:rgba(255,255,255,0.8); transition-delay: 0.4s;">
             2026.01.24 | 深圳客户关怀中心
         </div>
-        
         <div class="scroll-hint">﹀ 向上滑动 开启好运 ﹀</div>
     </div>
 
     <div class="card">
         <div class="card-title reveal-up">诚挚邀约</div>
-        
-        <div class="text-line reveal-left">
-            <b>尊敬的怡口贵宾：</b>
-        </div>
-        <div class="text-line reveal-right" style="transition-delay: 0.1s;">
-            岁序常易，华章日新。感谢您长久以来的信任与陪伴。
-        </div>
-        <div class="text-line reveal-left" style="transition-delay: 0.2s;">
-            1月24日，在农历新年到来之际，我们不想谈公事，只想邀您<b>“回家坐坐”</b>。
-        </div>
-        <div class="text-line reveal-right" style="transition-delay: 0.3s;">
-            没有喧嚣，只有茶香与墨香；没有套路，只有福利与温情。愿这杯好水，为您开启一年的顺遂与安康。
-        </div>
-        <div class="text-line reveal-up" style="text-align: right; margin-top: 20px; color:var(--gold);">
-            席位珍贵，静候君来
-        </div>
-    </div>
-
-    <div class="brand-box reveal-zoom">
-        <img src="brand.jpg" alt="百年怡口" class="brand-img">
+        <div class="text-line reveal-left"><b>尊敬的怡口贵宾：</b></div>
+        <div class="text-line reveal-right" style="transition-delay: 0.1s;">岁序常易，华章日新。感谢您长久以来的信任与陪伴。</div>
+        <div class="text-line reveal-left" style="transition-delay: 0.2s;">1月24日，在农历新年到来之际，我们不想谈公事，只想邀您<b>“回家坐坐”</b>。</div>
+        <div class="text-line reveal-right" style="transition-delay: 0.3s;">没有喧嚣，只有茶香与墨香；没有套路，只有福利与温情。愿这杯好水，为您开启一年的顺遂与安康。</div>
+        <div class="text-line reveal-up" style="text-align: right; margin-top: 20px; color:var(--gold);">席位珍贵，静候君来</div>
     </div>
 
     <div class="card" style="background:transparent; border:none; box-shadow:none; padding:0 20px;">
         <div class="card-title reveal-up">活动亮点</div>
         <div class="grid-container">
             <div class="grid-item reveal-left">
-                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1549809936-24ba0ce9925e?auto=format&fit=crop&w=400&q=80');"></div>
+                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1613408583303-748335013330?auto=format&fit=crop&w=400&q=80');"></div>
                 <div class="grid-text">🖋️ 挥毫纳福</div>
             </div>
             <div class="grid-item reveal-right">
@@ -356,10 +169,21 @@
         </div>
     </div>
 
+    <div class="reveal-zoom" style="margin: 40px 20px; text-align:center;">
+        <div class="card-title reveal-up" style="margin-bottom:15px;">百年实力 · 信心之选</div>
+        <div class="text-line reveal-up" style="font-size:14px; color:var(--light-gold); margin-bottom: 20px;">
+            始于1925年，近百年专注净水领域。<br>
+            怡口净水以其卓越品质，成为<b>巴菲特旗下伯克希尔·哈撒韦公司</b>的重要成员，值得您全家信赖。
+        </div>
+        <div class="hero-img-box" style="box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+            <img src="brand.jpg" alt="百年怡口" class="brand-img">
+        </div>
+    </div>
+
     <div class="card reveal-up">
         <div class="card-title">关于我们</div>
         <div class="text-line">
-            在深圳，我们不仅提供顶尖的净水设备，更致力于提供全生命周期的专业守护。
+            在深圳，我们不仅提供顶尖的净水设备，更致力于提供全生命周期的专业守护。从水质检测到设备检修，每一个环节都只为您用得安心。
         </div>
         <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" 
              style="width:100%; border-radius:8px; margin-top:10px;" class="reveal-zoom">
@@ -397,26 +221,16 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // 配置观察者：当元素进入屏幕 10% 时触发动画
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
+        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // 添加 active 类，触发 CSS 动画
                     entry.target.classList.add('active');
-                    // 动画只播放一次，取消观察
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
-
-        // 选取所有需要动画的元素
-        const animatedElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-zoom');
-        animatedElements.forEach(el => {
+        document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-zoom').forEach(el => {
             observer.observe(el);
         });
     });
