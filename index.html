@@ -94,18 +94,38 @@
         .brand-box::before { content: ''; position: absolute; top: -10px; left: 20px; right: 20px; bottom: -10px; border: 1px solid rgba(212, 175, 55, 0.2); z-index: -1; }
         .brand-img { width: 100%; display: block; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
 
-        /* 活动宫格 */
+        /* 活动宫格 - 修复样式 */
         .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .grid-item { background: rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-        .grid-img { height: 120px; background-size: cover; background-position: center; transition: transform 0.5s; }
-        .grid-text { color: var(--light-gold); text-align: center; padding: 12px 5px; font-size: 14px; font-weight: bold; }
+        .grid-item { background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; }
+        
+        /* 关键修改：直接控制图片标签，不再使用背景图 */
+        .grid-item img { 
+            width: 100%; 
+            height: 110px; 
+            object-fit: cover; 
+            display: block;
+        }
+        
+        .grid-text { 
+            background: rgba(139, 0, 0, 0.9);
+            color: var(--light-gold); 
+            text-align: center; 
+            padding: 10px 5px; 
+            font-size: 14px; 
+            font-weight: bold; 
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         /* 表单样式 */
         .form-input { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.9); border: none; border-radius: 4px; font-size: 14px; color: #333; }
         .submit-btn { width: 100%; padding: 15px; background: linear-gradient(45deg, #D4AF37, #F0E68C, #D4AF37); background-size: 200% 200%; animation: shine 3s infinite; border: none; color: #8B0000; font-weight: bold; font-size: 16px; border-radius: 30px; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); }
         @keyframes shine { 0% {background-position: 0% 50%;} 50% {background-position: 100% 50%;} 100% {background-position: 0% 50%;} }
 
-        img { object-fit: cover; }
+        /* 占位符修复 */
+        img { max-width: 100%; }
     </style>
 </head>
 <body>
@@ -143,19 +163,19 @@
         <div class="card-title reveal-up">活动亮点</div>
         <div class="grid-container">
             <div class="grid-item reveal-left">
-                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1549809936-24ba0ce9925e?auto=format&fit=crop&w=400&q=80');"></div>
+                <img src="https://images.unsplash.com/photo-1577083288073-40892c0860a4?q=80&w=400&auto=format&fit=crop" alt="挥毫纳福">
                 <div class="grid-text">🖋️ 挥毫纳福</div>
             </div>
             <div class="grid-item reveal-right">
-                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=400&q=80');"></div>
+                <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?q=80&w=400&auto=format&fit=crop" alt="净水私享">
                 <div class="grid-text">💧 净水私享</div>
             </div>
             <div class="grid-item reveal-left">
-                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=400&q=80');"></div>
+                <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=400&auto=format&fit=crop" alt="精致茶歇">
                 <div class="grid-text">🍪 精致茶歇</div>
             </div>
             <div class="grid-item reveal-right">
-                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=400&q=80');"></div>
+                <img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?q=80&w=400&auto=format&fit=crop" alt="专属好礼">
                 <div class="grid-text">🎁 专属好礼</div>
             </div>
         </div>
@@ -200,10 +220,9 @@
         <form action="https://formsubmit.co/2229869316@qq.com" method="POST" target="_blank">
             
             <input type="hidden" name="_subject" value="新客户报名：怡口净水新春茶话会">
-            
             <input type="hidden" name="_captcha" value="false">
             
-            <input type="hidden" name="_autoresponse" value="感谢您的报名，我们已收到您的信息！">
+            <input type="hidden" name="_autoresponse" value="尊贵的客户，您的报名信息已收到，我们将尽快与您联系！">
 
             <input type="text" name="姓名" class="form-input" placeholder="您的姓名" required>
             <input type="text" name="电话" class="form-input" placeholder="联系电话" required>
