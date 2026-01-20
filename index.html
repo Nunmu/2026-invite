@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>诚挚邀请 | 怡口净水 · 净享品质生活</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         :root {
             --primary-red: #B90B0B;
-            --dark-red: #8B0000;
+            --dark-red: #5e0000;
             --gold: #D4AF37;
             --light-gold: #FFE5B4;
         }
@@ -19,320 +18,405 @@
             margin: 0;
             padding: 0;
             background-color: var(--primary-red);
-            background-image: url('https://www.transparenttextures.com/patterns/chinese-new-year.png'); /* 红底暗纹 */
             font-family: "PingFang SC", "Microsoft YaHei", serif;
             color: #fff;
             overflow-x: hidden;
+            /* 动态背景图案 */
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 20%);
+            background-attachment: fixed;
         }
 
-        /* 装饰元素：顶部灯笼 */
-        .lanterns {
+        /* 飘落金粉特效 */
+        .gold-dust {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100px;
-            z-index: 10;
+            height: 100%;
             pointer-events: none;
-            background: url('https://cdn.pixabay.com/photo/2017/01/24/02/33/lanterns-2004660_1280.png') no-repeat center top;
-            background-size: contain; 
-            /* 注意：这是一个通用灯笼素材，您也可以上传自己的 lanterns.png */
+            z-index: 1;
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+            animation: moveBackground 20s linear infinite;
+        }
+        @keyframes moveBackground {
+            from { background-position: 0 0; }
+            to { background-position: 0 1000px; }
+        }
+
+        /* 顶部祥云装饰（用CSS画的，不需要图片） */
+        .header-deco {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+            opacity: 0.2;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
         }
 
         .container {
             max-width: 480px;
             margin: 0 auto;
             position: relative;
-            padding-bottom: 50px;
-            background: linear-gradient(180deg, #D91A1A 0%, #8B0000 100%);
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            min-height: 100vh;
+            padding-bottom: 80px;
+            z-index: 2; /* 保证内容在金粉之上 */
         }
 
-        /* 通用动画类：初始隐藏，滚动出现 */
-        .reveal {
+        /* --- 核心动画类 (Scroll Reveal) --- */
+        
+        /* 1. 向上浮现 (用于标题/卡片) */
+        .reveal-up {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        
+        /* 2. 左侧滑入 (用于文字段落) */
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1s ease-out;
         }
+
+        /* 3. 右侧滑入 (用于文字段落) */
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 1s ease-out;
+        }
+
+        /* 4. 缩放渐显 (用于图片) */
+        .reveal-zoom {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* 激活状态 */
+        .active {
+            opacity: 1 !important;
+            transform: translate(0) scale(1) !important;
+        }
+
+        /* --- 页面组件样式 --- */
 
         /* 1. 封面 Cover */
         .cover {
             position: relative;
             text-align: center;
             padding-top: 60px;
-            padding-bottom: 40px;
+            padding-bottom: 20px;
+            min-height: 90vh; /* 首屏充满屏幕 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .logo {
-            font-size: 20px;
-            color: #fff;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+            font-size: 18px;
+            color: var(--light-gold);
+            letter-spacing: 4px;
+            margin-bottom: 20px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: 300;
+        }
+        .hero-img-box {
+            position: relative;
+            margin: 20px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255,215,0,0.3);
         }
         .hero-img {
             width: 100%;
             display: block;
-            margin: 20px 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
         .main-title {
-            background: linear-gradient(to right, #FFD700, #FFF, #FFD700);
+            background: linear-gradient(to bottom, #FFE5B4, #D4AF37);
             -webkit-background-clip: text;
             color: transparent;
-            font-size: 26px;
+            font-size: 28px;
             font-weight: bold;
-            margin: 20px 0;
+            margin: 30px 0 10px;
             line-height: 1.4;
         }
-        .info-box {
-            background: rgba(139, 0, 0, 0.6);
-            border: 1px solid var(--gold);
-            margin: 0 20px;
-            padding: 15px;
-            border-radius: 8px;
+        
+        /* 下滑提示动画 */
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--light-gold);
+            font-size: 12px;
+            animation: bounce 2s infinite;
+            opacity: 0.8;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+            40% {transform: translateX(-50%) translateY(-10px);}
+            60% {transform: translateX(-50%) translateY(-5px);}
         }
 
-        /* 2. 邀请语 Intro */
+        /* 2. 通用玻璃卡片 Card */
         .card {
-            margin: 20px;
-            background: #fff;
-            color: #333;
+            margin: 25px 20px;
+            /* 磨砂玻璃效果 */
+            background: rgba(139, 0, 0, 0.5); 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
             border-radius: 12px;
-            padding: 25px 20px;
-            position: relative;
-            border: 2px solid var(--gold);
+            padding: 30px 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
         }
-        .card-header {
+        
+        .card-title {
             text-align: center;
-            margin-bottom: 20px;
-        }
-        .card-pill {
-            display: inline-block;
-            background: var(--light-gold);
-            color: var(--dark-red);
-            padding: 5px 20px;
-            border-radius: 20px;
+            font-size: 20px;
+            color: var(--gold);
+            margin-bottom: 25px;
             font-weight: bold;
-            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .intro-text {
+        .card-title::before, .card-title::after {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 10px;
+            opacity: 0.5;
+        }
+
+        .text-line {
             line-height: 1.8;
             font-size: 15px;
             text-align: justify;
-        }
-        .signature {
-            text-align: right;
-            margin-top: 20px;
-            font-weight: bold;
-            color: var(--dark-red);
+            margin-bottom: 15px;
+            color: #f0f0f0;
         }
 
-        /* 3. 品牌背书 Brand */
-        .brand-section img {
+        /* 3. 品牌图片 */
+        .brand-box {
+            margin: 40px 0;
+            position: relative;
+        }
+        .brand-box::before {
+            content: '';
+            position: absolute;
+            top: -10px; left: 20px; right: 20px; bottom: -10px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: -1;
+        }
+        .brand-img {
             width: 100%;
             display: block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        /* 4. 活动内容 Grid */
+        /* 4. 活动宫格 */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            padding: 0 20px;
         }
         .grid-item {
-            background: #fff;
+            background: rgba(255,255,255,0.05);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .grid-img {
-            height: 100px;
-            background-color: #eee;
+            height: 110px;
             background-size: cover;
             background-position: center;
+            transition: transform 0.5s;
         }
         .grid-text {
-            color: var(--dark-red);
+            color: var(--light-gold);
             text-align: center;
-            padding: 10px 5px;
-            font-size: 14px;
-            font-weight: bold;
+            padding: 12px 5px;
+            font-size: 13px;
         }
 
-        /* 5. 关于我们 & 地址 */
-        .about-img, .map-img {
-            width: 100%;
-            height: 180px;
-            background-color: #eee;
-            border-radius: 8px;
-            margin-top: 15px;
-            object-fit: cover;
-        }
-
-        /* 6. 表单 Form */
-        .form-group {
-            margin-bottom: 15px;
-        }
+        /* 5. 表单 */
         .form-input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 4px;
             font-size: 14px;
+            color: #333;
         }
         .submit-btn {
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(to right, #D4AF37, #F0E68C);
+            padding: 15px;
+            background: linear-gradient(45deg, #D4AF37, #F0E68C, #D4AF37);
+            background-size: 200% 200%;
+            animation: shine 3s infinite;
             border: none;
-            color: var(--dark-red);
+            color: #8B0000;
             font-weight: bold;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 30px;
             cursor: pointer;
             margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+        @keyframes shine {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
         }
 
-        /* 底部祥云 */
-        .footer-cloud {
-            height: 60px;
-            background: url('https://www.transparenttextures.com/patterns/shattered-island.png'); /* 模拟云纹 */
-            opacity: 0.5;
-            margin-top: 30px;
-        }
+        /* 图片占位符 */
+        img { object-fit: cover; }
     </style>
 </head>
 <body>
 
-<div class="lanterns"></div>
+<div class="gold-dust"></div>
+<div class="header-deco"></div>
 
 <div class="container">
 
-    <div class="cover reveal active">
-        <div class="logo">ECOWATER 怡口净水</div>
+    <div class="cover">
+        <div class="logo reveal-up">ECOWATER 怡口净水</div>
         
-        <img src="hero.jpg" alt="怡口净水" class="hero-img animate__animated animate__fadeIn">
-        
-        <div class="main-title">
-            「怡口净水 · 净享品质生活」<br>新春私享茶话会邀请函
-        </div>
-
-        <div class="info-box">
-            <p>📅 活动时间：2026年01月24日</p>
-            <p>📍 活动地点：怡口净水客户关怀中心</p>
+        <div class="hero-img-box reveal-zoom">
+            <img src="hero.jpg" alt="怡口净水" class="hero-img">
         </div>
         
-        <div style="margin-top:20px; font-size:40px; color:#FFD700; font-family:'KaiTi', serif;">福</div>
+        <div class="main-title reveal-up" style="transition-delay: 0.2s;">
+            <span style="font-size:16px; display:block; margin-bottom:5px; font-weight:normal;">新春特别企划</span>
+            老客户私享茶话会
+        </div>
+
+        <div class="reveal-up" style="font-size:14px; color:rgba(255,255,255,0.8); transition-delay: 0.4s;">
+            2026.01.24 | 深圳客户关怀中心
+        </div>
+        
+        <div class="scroll-hint">﹀ 向上滑动 开启好运 ﹀</div>
     </div>
 
-    <div class="card reveal">
-        <div class="card-header">
-            <span class="card-pill">岁序常易 · 华章日新</span>
+    <div class="card">
+        <div class="card-title reveal-up">诚挚邀约</div>
+        
+        <div class="text-line reveal-left">
+            <b>尊敬的怡口贵宾：</b>
         </div>
-        <div class="intro-text">
-            <p>尊敬的怡口贵宾：</p>
-            <p>时光流转，感恩有您同行。1月24日，我们想用一场轻松的茶话会，回馈您这份珍贵的信任。</p>
-            <p>没有喧嚣，只有茶香与墨香；没有浮躁，只有福利与温情。</p>
-            <p>诚邀您来深圳客户关怀中心，写幅对联，品口好茶，让身心在这个午后“净”享舒展。</p>
-            <p style="text-align: center; color:#D4AF37; margin-top:15px;">席位珍贵，静候君来。</p>
+        <div class="text-line reveal-right" style="transition-delay: 0.1s;">
+            岁序常易，华章日新。感谢您长久以来的信任与陪伴。
         </div>
-        <div class="signature">怡口净水深圳客户关怀中心 敬呈</div>
+        <div class="text-line reveal-left" style="transition-delay: 0.2s;">
+            1月24日，在农历新年到来之际，我们不想谈公事，只想邀您<b>“回家坐坐”</b>。
+        </div>
+        <div class="text-line reveal-right" style="transition-delay: 0.3s;">
+            没有喧嚣，只有茶香与墨香；没有套路，只有福利与温情。愿这杯好水，为您开启一年的顺遂与安康。
+        </div>
+        <div class="text-line reveal-up" style="text-align: right; margin-top: 20px; color:var(--gold);">
+            席位珍贵，静候君来
+        </div>
     </div>
 
-    <div class="brand-section reveal">
-        <img src="brand.jpg" alt="百年怡口" style="border-top: 2px solid #D4AF37; border-bottom: 2px solid #D4AF37;">
+    <div class="brand-box reveal-zoom">
+        <img src="brand.jpg" alt="百年怡口" class="brand-img">
     </div>
 
-    <div class="reveal" style="margin-top: 30px;">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <span class="card-pill">活动内容</span>
-        </div>
+    <div class="card" style="background:transparent; border:none; box-shadow:none; padding:0 20px;">
+        <div class="card-title reveal-up">活动亮点</div>
         <div class="grid-container">
-            <div class="grid-item">
-                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1549809936-24ba0ce9925e?auto=format&fit=crop&w=300&q=80');"></div>
-                <div class="grid-text">新春雅集 · 挥毫纳福</div>
+            <div class="grid-item reveal-left">
+                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1549809936-24ba0ce9925e?auto=format&fit=crop&w=400&q=80');"></div>
+                <div class="grid-text">🖋️ 挥毫纳福</div>
             </div>
-            <div class="grid-item">
-                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=300&q=80');"></div>
-                <div class="grid-text">净水私享 · 品质鉴赏</div>
+            <div class="grid-item reveal-right">
+                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=400&q=80');"></div>
+                <div class="grid-text">💧 净水私享</div>
             </div>
-            <div class="grid-item">
-                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=300&q=80');"></div>
-                <div class="grid-text">精致茶歇 · 悠享时光</div>
+            <div class="grid-item reveal-left">
+                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=400&q=80');"></div>
+                <div class="grid-text">🍪 精致茶歇</div>
             </div>
-            <div class="grid-item">
-                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=300&q=80');"></div>
-                <div class="grid-text">福运好礼 · 专属特权</div>
+            <div class="grid-item reveal-right">
+                <div class="grid-img" style="background-image: url('https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=400&q=80');"></div>
+                <div class="grid-text">🎁 专属好礼</div>
             </div>
         </div>
     </div>
 
-    <div class="card reveal" style="background: #A91D1D; color: #fff; border:none;">
-        <div class="card-header">
-            <span class="card-pill" style="background:#fff; color:#A91D1D;">关于我们</span>
+    <div class="card reveal-up">
+        <div class="card-title">关于我们</div>
+        <div class="text-line">
+            在深圳，我们不仅提供顶尖的净水设备，更致力于提供全生命周期的专业守护。
         </div>
-        <div class="intro-text">
-            <p>在深圳，我们不仅提供顶尖的净水设备，更致力于提供全生命周期的专业守护。从水质检测到设备检修，每一个环节都只为您用得安心。</p>
-        </div>
-        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" class="about-img" alt="门店环境">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" 
+             style="width:100%; border-radius:8px; margin-top:10px;" class="reveal-zoom">
     </div>
 
-    <div class="card reveal">
-        <div class="card-header">
-            <span class="card-pill">地址导航</span>
+    <div class="card reveal-up">
+        <div class="card-title">地址导航</div>
+        <img src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&w=600&q=80" 
+             style="width:100%; border-radius:8px;" class="reveal-zoom">
+        <div style="text-align:center; margin-top:15px; font-size:13px; color:#ddd;">
+            📍 宝安区新安街道布心社区73区<br>腾骏科创园A栋1楼 怡口净水
         </div>
-        <img src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&w=600&q=80" class="map-img" alt="地图">
-        <p style="margin-top:15px; text-align:center; font-size:14px; color:#666;">
-            详细地址：宝安区新安街道布心社区73区腾骏科创园A栋1楼<br>怡口净水客户关怀中心
-        </p>
-        <a href="https://map.baidu.com" target="_blank" style="display:block; text-align:center; margin-top:10px; color:#B90B0B; text-decoration:none;">🗺️ 点击查看导航</a>
+        <a href="https://map.baidu.com" target="_blank" 
+           style="display:block; text-align:center; margin-top:15px; color:var(--gold); text-decoration:none; border:1px solid var(--gold); padding:8px; border-radius:20px;">
+           🚀 一键导航到店
+        </a>
     </div>
 
-    <div class="card reveal" style="background: #B90B0B; border: 1px solid gold;">
-        <div class="card-header">
-            <span class="card-pill" style="background:#fff; color:#B90B0B;">报名登记</span>
+    <div class="card reveal-up" style="background: rgba(255,255,255,0.95);">
+        <div class="card-title" style="color:#B90B0B; border-color:#B90B0B;">预约席位</div>
+        <input type="text" class="form-input" placeholder="您的姓名">
+        <input type="text" class="form-input" placeholder="联系电话">
+        <input type="text" class="form-input" placeholder="预计人数">
+        <button class="submit-btn" onclick="alert('恭喜您预约成功！我们将为您预留专属好礼。')">立即提交预约</button>
+        <div style="text-align:center; font-size:12px; color:#999; margin-top:10px;">
+            *仅限20席，请提前锁定名额
         </div>
-        <div class="form-group">
-            <input type="text" class="form-input" placeholder="您的姓名">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-input" placeholder="联系方式">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-input" placeholder="备注留言">
-        </div>
-        <button class="submit-btn" onclick="alert('报名提交成功！我们会尽快联系您。')">立即提交预约</button>
     </div>
 
-    <div class="footer-cloud"></div>
-    <div style="text-align: center; padding: 20px; font-size: 12px; color: rgba(255,255,255,0.6);">
+    <div style="text-align: center; font-size: 12px; color: rgba(255,255,255,0.4);">
         © 2026 怡口净水 · 深圳
     </div>
 
 </div>
 
 <script>
-    // 简单的滚动监听脚本
     document.addEventListener('DOMContentLoaded', function() {
+        // 配置观察者：当元素进入屏幕 10% 时触发动画
         const observerOptions = {
-            threshold: 0.1
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    // 添加 active 类，触发 CSS 动画
                     entry.target.classList.add('active');
+                    // 动画只播放一次，取消观察
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach(el => {
+        // 选取所有需要动画的元素
+        const animatedElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-zoom');
+        animatedElements.forEach(el => {
             observer.observe(el);
         });
     });
