@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>诚挚邀请 | 怡口净水新春私享茶话会</title>
+    <style>
+        /* 全局样式 - 红色喜庆高端风 */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #8B0000 0%, #B22222 100%);
+            font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+            color: #F8F8FF;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-image: url('https://www.transparenttextures.com/patterns/shattered-island.png'); /* 增加一点纹理质感 */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        /* 第一页：封面 */
+        .page-cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 2px solid #DAA520;
+            padding: 20px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #DAA520;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+        .main-title {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(to right, #FFD700, #F0E68C);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+        }
+        .sub-title {
+            font-size: 18px;
+            color: #F0E68C;
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite;
+            color: #DAA520;
+            font-size: 14px;
+        }
+
+        /* 内容板块通用样式 */
+        .section {
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            margin: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(218, 165, 32, 0.3);
+        }
+        .section-title {
+            text-align: center;
+            font-size: 22px;
+            color: #DAA520;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: #DAA520;
+            margin: 10px auto 0;
+        }
+        
+        /* 文本内容 */
+        .content-text {
+            font-size: 16px;
+            text-align: justify;
+            margin-bottom: 20px;
+            color: #FFF;
+        }
+        
+        /* 流程时间轴 */
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            border-left: 2px solid #DAA520;
+            padding-left: 15px;
+            margin-left: 10px;
+        }
+        .time {
+            font-weight: bold;
+            color: #F0E68C;
+            width: 60px;
+            flex-shrink: 0;
+        }
+        .event {
+            color: #FFF;
+        }
+
+        /* 底部信息 */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .btn {
+            display: block;
+            width: 80%;
+            margin: 30px auto;
+            padding: 15px;
+            background: linear-gradient(to right, #DAA520, #B8860B);
+            color: #8B0000;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-cover">
+        <div class="logo">ECOWATER 怡口净水</div>
+        <div class="main-title">净享品质生活</div>
+        <div class="sub-title">老客户私享茶话会 · 深圳站</div>
+        <div class="scroll-down">﹀ 上滑开启新春好运 ﹀</div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">诚挚邀约</div>
+        <div class="content-text">
+            <p>尊敬的怡口老友：</p>
+            <p>冬将尽，春可期。感谢您长久以来的信任。在农历新年到来之际，我们诚邀您回家坐坐。</p>
+            <p>没有喧嚣，只有茶香与墨香；没有套路，只有福利与温情。愿这杯好水，为您开启一年的顺遂与安康。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">活动亮点</div>
+        <div class="content-text" style="text-align: center;">
+            <p>🧧 <b>新春手作</b> | 挥毫泼墨写春联</p>
+            <p>🍵 <b>精致茶歇</b> | 法式甜点品鉴会</p>
+            <p>🎁 <b>福运抽奖</b> | 100%中奖专属礼</p>
+            <p>🛠️ <b>免费服务</b> | 设备检修与答疑</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">活动流程</div>
+        <div class="timeline-item">
+            <div class="time">13:30</div>
+            <div class="event">签到入场，领取伴手礼券</div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">14:00</div>
+            <div class="event">净享沙龙 & 新品鉴赏</div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">14:45</div>
+            <div class="event">新春手作：写福字、写对联</div>
+        </div>
+        <div class="timeline-item">
+            <div class="time">15:30</div>
+            <div class="event">福运抽奖 & 限时特惠</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">活动信息</div>
+        <div class="content-text" style="text-align: center;">
+            <p><b>📅 时间</b><br>2026年1月24日（周六）14:00</p>
+            <p><b>📍 地点</b><br>怡口净水深圳客户关怀中心<br><span style="font-size:12px; opacity:0.8;">宝安区新安街道布心社区73区腾骏科创园A栋1楼</span></p>
+            <a href="#" class="btn">立即预约席位 (仅限20席)</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        © 2026 怡口净水深圳客户关怀中心
+    </div>
+</div>
+
+</body>
+</html>
