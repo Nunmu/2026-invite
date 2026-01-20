@@ -204,10 +204,20 @@
 
     <div class="card reveal-up" style="background: rgba(255,255,255,0.95);">
         <div class="card-title" style="color:#B90B0B; border-color:#B90B0B;">预约席位</div>
-        <input type="text" class="form-input" placeholder="您的姓名">
-        <input type="text" class="form-input" placeholder="联系电话">
-        <input type="text" class="form-input" placeholder="预计人数">
-        <button class="submit-btn" onclick="alert('恭喜您预约成功！我们将为您预留专属好礼。')">立即提交预约</button>
+        
+        <form action="https://formsubmit.co/2229869316@qq.com" method="POST">
+            
+            <input type="hidden" name="_subject" value="新客户报名：怡口净水新春茶话会">
+            
+            <input type="hidden" name="_captcha" value="false"> <input type="hidden" name="_autoresponse" value="感谢您的报名，我们已收到您的信息！"> <input type="text" name="姓名" class="form-input" placeholder="您的姓名" required>
+            
+            <input type="text" name="电话" class="form-input" placeholder="联系电话" required>
+            
+            <input type="text" name="备注" class="form-input" placeholder="预计人数 / 备注">
+            
+            <button type="submit" class="submit-btn">立即提交预约</button>
+        </form>
+
         <div style="text-align:center; font-size:12px; color:#999; margin-top:10px;">
             *仅限20席，请提前锁定名额
         </div>
